@@ -31,7 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inefficient Search
     searchInput.addEventListener('keyup', () => {
-        const searchTerm = searchInput.value.toLowerCase();
+        const searchTerm = searchInput.value.toLowerCase().trim(); // Trim เพื่อลบช่องว่าง
+        if (searchTerm === '') {
+            displayProducts(allProducts); // โชว์สินค้าทั้งหมดถ้าไม่มีการค้นหา
+            return;
+        }
         const filteredProducts = allProducts.filter(product => {
             // Simple search, not very efficient
             return product.name.toLowerCase().includes(searchTerm);
