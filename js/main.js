@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productList = document.getElementById('product-list');
     const searchInput = document.getElementById('searchInput');
+    const loader = document.getElementById('loader');//อ้างอิง loader 
     let allProducts = [];
+
+    loader.style.display = 'block'; //แสดง loader ก่อนโหลด
 
     // Fetch products from JSON
     fetch('js/products.json')
@@ -19,10 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
             card.innerHTML = `
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
-                <p>ราคา: ${product.price} บาท</p>
-            `;
+                <p>ราคา: ${product.price.toLocaleString()} บาท</p>
+            `;//เพิ่ม , ให้กับราคาที่หลักพันขึ้นไป
             productList.appendChild(card);
         });
+        loader.style.display = 'none';//ซ่อน loader หลังแสดงสินค้า
     }
 
     // Inefficient Search
